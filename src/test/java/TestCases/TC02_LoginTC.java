@@ -44,9 +44,10 @@ public class TC02_LoginTC {
     @Feature("login feature")
     @Story("valid login")
     public void validLogin() {
-        new P01_LandingPage(getDriver()).goToLoginForm()
-                .enterUserName(userName)
-                .enterUserPassword(password)
+        new P01_LandingPage(getDriver())
+                .goToLoginForm()
+                .enterUserName(UtilityData.readJson().login.validLogin.userName)
+                .enterUserPassword(UtilityData.readJson().login.validLogin.password)
                 .clickOnLoginBtn();
         Assert.assertTrue(new P02_LoginPage(getDriver()).assertOnHomeUrl(UtilityData.readDataFromPropertyFile("ENV", "HomePage")));
     }
@@ -59,8 +60,8 @@ public class TC02_LoginTC {
     @Story("invalid login")
     public void inValidLogin() {
         new P01_LandingPage(getDriver()).goToLoginForm()
-                .enterUserName("hon d")
-                .enterUserPassword(password)
+                .enterUserName(UtilityData.readJson().login.inValidLogin.userName)
+                .enterUserPassword(UtilityData.readJson().login.inValidLogin.password)
                 .clickOnLoginBtn();
 
         Assert.assertEquals(new P02_LoginPage(getDriver()).assertOnTextDanger(), "Login failed! Please ensure the username and password are valid.");
@@ -74,8 +75,8 @@ public class TC02_LoginTC {
     @Story("invalid login")
     public void inValidLoginTwo() {
         new P01_LandingPage(getDriver()).goToLoginForm()
-                .enterUserName("")
-                .enterUserPassword("")
+                .enterUserName(UtilityData.readJson().login.inValidLogin2.userName)
+                .enterUserPassword(UtilityData.readJson().login.inValidLogin2.password)
                 .clickOnLoginBtn();
         Assert.assertEquals(new P02_LoginPage(getDriver()).assertOnTextDanger(), "Login failed! Please ensure the username and password are valid.");
     }
